@@ -1,0 +1,28 @@
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "root": [
+          "."
+        ],
+        "alias": {
+          "styles": "./styles",
+          "libs": "libs"
+        },
+        "cwd": "babelrc"
+      }
+    ]
+  ],
+  "presets": [
+    [
+      "next/babel",
+      {
+        "preset-env": {
+          "modules": "commonjs"
+        }
+      }
+    ]
+  ],
+  "ignore": []
+}
