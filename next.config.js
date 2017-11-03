@@ -6,7 +6,7 @@ module.exports = {
 
         config.module.rules.push(
             {
-                test: /\.(css|scss)/,
+                test: /\.(css|s[a|c]ss)/,
                 loader: 'emit-file-loader',
                 options: {
                     name: 'dist/[path][name].[ext]'
@@ -20,7 +20,7 @@ module.exports = {
                 ],
             },
             {
-                test: /\.scss$/,
+                test: /\.s[a|c]ss$/,
                 use: [
                     'babel-loader',
                     'styled-jsx-css-loader',

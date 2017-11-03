@@ -1,0 +1,7 @@
+@import "libs/hotcss/px2rem";
+
+.test1 {
+  padding-bottom: calc(0.5rem - 1px);
+  height: px2rem(200);
+  background: green;
+}

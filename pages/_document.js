@@ -6,6 +6,8 @@ export default class MyDocument extends Document {
         return (
             <html>
             <Head>
+                <title>我要学</title>
+                <meta charSet='utf-8'/>
                 {/*<!--隐藏状态栏/设置状态栏颜色-->*/}
                 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 
@@ -14,14 +16,14 @@ export default class MyDocument extends Document {
 
                 {/*<!--忽略自动识别邮箱账号：-->*/}
                 <meta content="email=no" name="format-detection"/>
-                <title>我要学</title>
-                <meta name="viewport" content="width=device-width"/>
-                <meta name="hotcss" content="max-width=0, design-width=414"/>
-                <script src='/static/hotcss/hotcss.js'></script>
+
+                <meta name='viewport' content='initial-scale=1.0, width=device-width'/>
+                <meta name="hotcss" content="max-width=414, design-width=414"/>
             </Head>
             <body>
             <Main/>
             <NextScript/>
+
             </body>
             </html>
         );
