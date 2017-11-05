@@ -1,10 +1,13 @@
-import {activatePlugin, keaReducer} from 'kea';
-import sagaPlugin from 'kea-saga';
+import {activatePlugin, keaReducer} from 'libs/kea';
+// import sagaPlugin from 'kea-saga';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
-import {combineReducers, createStore, applyMiddleware} from 'redux';
-import nextReduxSaga from 'next-redux-saga';
-import {default as baseWithRedux} from "next-redux-wrapper";
+import {applyMiddleware, combineReducers, createStore} from 'redux';
+import {default as baseWithRedux} from "libs/next-redux-wrapper";
+import withReduxSaga from "libs/next-redux-saga";
+
+function* rootSaga() {
+}
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -20,7 +23,9 @@ export function configureStore(initialState) {
         initialState,
         composeWithDevTools(applyMiddleware(sagaMiddleware))
     );
-    activatePlugin(sagaPlugin);
+
+    // activatePlugin(sagaPlugin);
+    store.sagaTask = sagaMiddleware.run(rootSaga)
     return store;
 }
 
