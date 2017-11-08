@@ -1,21 +1,21 @@
-import { selectPropsFromLogic } from './connect/props'
-import { propTypesFromConnect } from './connect/prop-types'
-import { combineReducerObjects, convertReducerArrays } from './logic/reducer'
-import { pathSelector, createSelectors } from './logic/selectors'
-import { createActions } from './actions/create'
-import { selectActionsFromLogic } from './connect/actions'
+import {selectPropsFromLogic} from './connect/props'
+import {propTypesFromConnect} from './connect/prop-types'
+import {combineReducerObjects, convertReducerArrays} from './logic/reducer'
+import {createSelectors, pathSelector} from './logic/selectors'
+import {createActions} from './actions/create'
+import {selectActionsFromLogic} from './connect/actions'
 
 import convertConstants from '../utils/convert-constants'
 import shallowEqual from '../utils/shallow-equal'
 
-import { createSelector } from 'reselect'
-import { connectAdvanced } from 'react-redux'
+import {createSelector} from 'reselect'
+import {connectAdvanced} from 'react-redux'
 
-import { setCache, getCache } from './cache'
+import {getCache, setCache} from './cache'
 
-import { firstReducerRoot, isSyncedWithStore, addReducer } from './reducer'
+import {addReducer, firstReducerRoot, isSyncedWithStore} from './reducer'
 
-import { globalPlugins, activatePlugin } from './plugins'
+import {activatePlugin, globalPlugins} from './plugins'
 
 function isStateless (Component) {
   return !Component.prototype.render
@@ -392,7 +392,7 @@ export function kea (_input) {
     if (isStateless(Klass)) {
       plugins.injectToConnectedClass.forEach(f => f(input, output, KonnektedKlass))
     }
-      KonnektedKlass.output = output;
+
     return KonnektedKlass
   }
 

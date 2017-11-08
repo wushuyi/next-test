@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
 import Head from 'next/head'
-import bulma from 'libs/bulma/bulma.sass';
+// import bulma from 'libs/bulma/bulma.sass';
 
 class Layout extends React.Component {
     static defaultProps = {
@@ -36,7 +36,7 @@ class Layout extends React.Component {
                 <footer>
                     {'I`m here to stay'}
                 </footer>
-                <style jsx>{bulma}</style>
+                {/*<style jsx>{bulma}</style>*/}
             </div>
         )
     }
