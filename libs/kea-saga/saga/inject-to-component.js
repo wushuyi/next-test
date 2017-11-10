@@ -20,7 +20,7 @@ export default function injectSagasIntoClass(Klass, input, output) {
     Klass.getInitialProps = function (ctx) {
       // console.log('component getInitialProps!', ctx);
       startSaga(function* () {
-        yield take('increment (pages.index)1');
+        yield take('increment (pages.index)');
         yield put({
           type: 'increment (pages.index)',
           payload: {
