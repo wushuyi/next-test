@@ -11,10 +11,9 @@ function withReduxSaga(BaseComponent) {
         props = await BaseComponent.getInitialProps(ctx)
       }
 
-      console.log(store.sagaTask);
       if (isServer) {
         store.dispatch(END)
-        // await store.sagaTask.done
+        await store.sagaTask.done
       }
 
       return props

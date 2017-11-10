@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import Layout from 'components/layout/default';
 import {withRedux} from 'store';
 import logic from 'logic/pageIndex';
-import {connect} from 'libs/kea'
-import {put} from 'redux-saga/effects'
+import {connect} from 'libs/kea';
+import {put} from 'redux-saga/effects';
 
 async function getLibs() {
   let libs = {};
@@ -16,13 +16,15 @@ async function getLibs() {
   actions: [
     logic, [
       'increment',
-      'decrement'
+      'decrement',
+      'title'
     ]
   ],
   props: [
     logic, [
       'counter',
-      'doubleCounter'
+      'doubleCounter',
+      'title',
     ]
   ]
 })
@@ -37,35 +39,9 @@ class Index extends React.Component {
   }
 
   static async getInitialProps({isServer, store, req, actions, selectors}) {
-    // await kea.actions.increment(8);
-    // let doubleCounter = await kea.selectors.doubleCounter();
-    // console.log('doubleCounter', doubleCounter);
-
     let jquery, props = {};
-    console.log(logic.actions.increment(2))
-    await put(logic.actions.increment(2));
-    // if (isBrowser) {
-    //   props.libs = await getLibs();
-    // }
-    // actions.increment(1);
-    // actions.increment(2);
-    // props.p1 = await  new Promise((resolve, reject) => {
-    //     let tit = 'one';
-    //     setTimeout(() => {
-    //         console.log(tit);
-    //
-    //         resolve(tit);
-    //     }, 500, tit);
-    // });
-    // props.p2 = await new Promise((resolve, reject) => {
-    //     let tit = 'two';
-    //     setTimeout(() => {
-    //         console.log(tit);
-    //
-    //         resolve(tit);
-    //     }, 500, tit);
-    // });
-
+    store.dispatch(logic.actions.increment(1));
+    store.dispatch(logic.actions.title('hello'));
     return props;
   }
 
@@ -76,9 +52,11 @@ class Index extends React.Component {
     };
   }
 
-  componentWillMount() {
-    console.log('componentWillMount')
-  }
+
+  // async componentDidMount() {
+  //   console.log('componentDidMount');
+  //   await put.resolve(logic.actions.increment(2));
+  // }
 
   // async componentDidMount() {
   //   this.mounted = true;
@@ -94,10 +72,11 @@ class Index extends React.Component {
 
 
   render() {
-    let {counter, doubleCounter} = this.props;
+    let {counter, doubleCounter, title} = this.props;
     let {increment, decrement} = this.actions;
     return (
       <Layout>
+        <h1>title: {title}</h1>
         <div>counter: {counter}</div>
         <div>doubleCounter: {doubleCounter}</div>
         <div>

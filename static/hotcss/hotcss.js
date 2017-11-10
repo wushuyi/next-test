@@ -14,7 +14,7 @@
             maxWidth = 414,
             designWidth = 414;
 
-        console.log(viewportEl);
+        // console.log(viewportEl);
 
         dpr = dpr >= 3 ? 3 : ( dpr >= 2 ? 2 : 1 );
 

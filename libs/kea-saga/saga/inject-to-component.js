@@ -18,6 +18,7 @@ export default function injectSagasIntoClass (Klass, input, output) {
   Klass.prototype._injectedKeaSaga = true
 
   const originalComponentDidMount = Klass.prototype.componentWillMount
+  console.log(Klass);
   Klass.prototype.componentWillMount = function () {
     if (DEBUG) {
       console.log('component did mount')

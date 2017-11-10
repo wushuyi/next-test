@@ -1,19 +1,25 @@
 import {kea} from 'libs/kea';
 import PropTypes from 'prop-types';
-import {put, race, take} from 'redux-saga/effects'
-import {delay} from 'redux-saga'
+import {put, race, take} from 'redux-saga/effects';
+import {delay} from 'redux-saga';
+
+let count = 0;
 
 const logic = kea({
   path: (key) => ['scenes', 'pages', 'index'],
   actions: () => ({
     increment: (amount) => ({amount}),
-    decrement: (amount) => ({amount})
+    decrement: (amount) => ({amount}),
+    title: (text) => ({text}),
   }),
 
   reducers: ({actions}) => ({
     counter: [0, PropTypes.number, {
       [actions.increment]: (state, payload) => state + payload.amount,
       [actions.decrement]: (state, payload) => state - payload.amount
+    }],
+    title: ['', PropTypes.string, {
+      [actions.title]: (state, payload) => payload.text
     }]
   }),
 
@@ -25,12 +31,13 @@ const logic = kea({
     ]
   }),
 
-  // start: function* () {
-  //   const {increment} = this.actions;
-  //   yield put(increment(2))
-  //   // saga started or component mounted
-  //   console.log(this)
-  // },
+  start: function* () {
+    const {increment} = this.actions;
+    yield put(increment(6))
+    // saga started or component mounted
+    // console.log(this)
+    console.log('run start2', count++);
+  },
 
   takeEvery: ({actions, workers}) => ({
     [actions.increment]: workers.start
@@ -38,9 +45,10 @@ const logic = kea({
 
   workers: {
     start: function* () {
-      const {decrement} = this.actions
-      console.log('run workers')
-      yield put(decrement(2))
+      const {decrement, title} = this.actions;
+      console.log('run workers2');
+      // yield put(decrement(1));
+      yield put(title('hello'));
     }
   }
 });
