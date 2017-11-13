@@ -4,6 +4,7 @@ import {eventChannel} from 'redux-saga';
 let emitter;
 let cancelCounter = 1;
 let toCancel = {};
+let isBrowser = typeof window !== 'undefined';
 
 function createComponentChannel(socket) {
   return eventChannel(emit => {
@@ -15,7 +16,8 @@ function createComponentChannel(socket) {
 
 function* manSaga() {
   const channel = yield call(createComponentChannel);
-  while (true) {
+  let lock = true;
+  while (lock) {
     const {startSaga, cancelSaga, saga, counter} = yield take(channel);
     if (startSaga) {
       toCancel[counter] = yield fork(saga);
@@ -23,13 +25,14 @@ function* manSaga() {
     if (cancelSaga) {
       yield cancel(toCancel[counter]);
     }
+    if (!isBrowser) {
+      lock = false;
+    }
   }
 }
 
 export function* keaSaga() {
-  yield all([
-    spawn(manSaga)
-  ]);
+  yield fork(manSaga);
 }
 
 export function startSaga(saga) {
